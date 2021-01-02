@@ -27,9 +27,12 @@ class Producer:
         if not self.__producer:
             self.__producer = self.producer()
 
-        self.__producer.send(self.topic, value = message)
-
+        try:
+            self.__producer.send(self.topic, value = message)
+        except KafkaError:
+            raise LogSendException('KafkaLogsProducer error sending log to Kafka')
     
-    def close(self):
+    def close(self, timeout=None):
+        """Producer會等待timeout時間完成所有處理中的請求，然後強行退出"""
         self.__producer.flush()
-        self.__producer.close()
+        self.__producer.close(timeout)
