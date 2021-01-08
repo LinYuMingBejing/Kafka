@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  fluent-bit:
+    image: bitnami/fluent-bit
+    user: root
+    command: /fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf
+    volumes:
+      - .:/fluent-bit/etc/
+      - /var/log/supervisor/data.log:/var/log/data.log
