@@ -1,3 +1,37 @@
+### Enviroment:
+* Ubuntu: 18.04 
+* Python: 3.7.0
+* Database: Kafka
+* Collecting Logs: Fluent-bit
+
+
+#### How to install kafka?
+```
+$ sudo docker-compose up --build -d 
+```
+
+* Kafka Tool: https://www.kafkatool.com/
+
+
+#### How to Run Consumer in Background?
+* Copy File
+```
+$ cp ./supervisor/supervisor_kafka.conf /etc/
+```
+
+* Start Supervisor
+```
+$ supervisord -c /etc/supervisord_kafka.conf
+```
+
+#### How to Collect Consumer Error Log to Elasticsearch?
+```
+$ cd fluent-bit
+$ sudo docker-compose up --build -d 
+```
+![Log](https://img.onl/U0t3tB)
+
+
 #### Kafka重要概念
 + leader & follower：
     + 通常只有leader對外提供服務，follower只是被動地追隨leader狀態，保持與其同步。存在的唯一價值就是充當leader的候補。
